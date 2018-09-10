@@ -1,0 +1,54 @@
+#!/bin/bash
+#This program will greet the user and then display the user id, server name,server ip address, the os release, the linux flavor, record of past logins, 
+#server available memory, all currently running processes, current server file system , all user ids with the owner, and how many logins for the 2018 Fall Scripting Class
+
+echo " "
+echo "Welcome to program 1"
+echo "I will need your first name. Please enter your first name below"
+read FNAME
+
+echo "Please enter your last name below"
+read LNAME
+echo " "
+
+echo "Hello $FNAME $LNAME! Your Linux login id is $USER"
+echo " "
+
+HNAME=`hostname`
+IP=`hostname -I`
+echo "The hostname for this server is $HNAME and the ip address is $IP"
+echo " "
+
+OS=`cat /etc/os-release | head -2`
+echo "The OS release and the Linux flavor for this server are:"
+echo $OS 
+echo " "
+
+echo "Record log for past logins of user ebaxter:"
+last | grep ebaxter1
+echo " "
+
+SMEM=`cat /proc/meminfo | head -2 | tail -1`
+echo "Current system memory is $SMEM"
+echo " "
+
+echo "All current running non-root processes:"
+ps -ef | grep -v root
+echo " "
+
+FILE=`df -h`
+echo "Current file system information:"
+df -h
+echo " "
+
+echo "All current user ids with the owner in the 2018FA groop:"
+cat /etc/passwd | grep 2018FA | cut -d: -f1,5 | tr "," : | cut -d: -f1,2 | tr ":" " "
+echo " "
+
+LOGCOUNT=`cat /etc/passwd | grep 2018FA | wc -l`
+echo "There are currently $LOGCOUNT logins created for the 2018FA class"
+echo " "
+
+echo "Thank you for using this program goodbye!"
+
+exit 0

@@ -1,0 +1,57 @@
+#!/bin/bash
+# Filename: task
+# This program will give a menu to the user for different commands to run
+
+echo "Hello, please choose one of the following commands by type the option number:"
+
+# Menu
+if [[ $# -eq 0 ]]
+then
+echo "1. Check if server is up and running"
+echo "2. Find the number the router hops it takes to reach a given server site"
+echo "3. Enter a user login id and display the id owner"
+echo "4. Compress a given directoru and send the compressed file to an email address"
+echo "5. Send a file using email"
+echo "Enter selection:" 
+
+else
+while test $# != 0
+do
+echo "1. Check if server is up and running"
+echo "2. Find the number the router hops it takes to reach a given server site"
+echo "3. Enter a user login id and display the id owner"
+echo "4. Compress a given directoru and send the compressed file to an email address"
+echo "5. Send a file using email"
+echo "6.  Exit Program"
+echo "Enter selection:"  
+done
+fi
+
+
+
+# Cases
+read task
+case $task in
+	1 ) echo "Running ping command on current server"
+		server=`hostname`
+		ping -c3 $server
+		;;
+	2 ) echo "Please enter a website in order to find the number of router hops"
+		read hops
+		traceroute $hops
+		;;
+	* ) echo "That is not a vaild option"
+esac
+
+
+
+
+
+
+
+
+
+
+echo "Thank you for using this program. See you next time!"
+
+exit 0
