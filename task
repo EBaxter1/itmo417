@@ -2,56 +2,88 @@
 # Filename: task
 # This program will give a menu to the user for different commands to run
 
-echo "Hello, please choose one of the following commands by type the option number:"
+echo "Hello and welcome to the command choice program!"
 
-# Menu
-if [[ $# -eq 0 ]]
-then
-echo "1. Check if server is up and running"
-echo "2. Find the number the router hops it takes to reach a given server site"
-echo "3. Enter a user login id and display the id owner"
-echo "4. Compress a given directoru and send the compressed file to an email address"
-echo "5. Send a file using email"
-echo "Enter selection:" 
-
+# Figure out argument
+if [[ $# != 0 ]]
+then 
+	check=1
 else
-while test $# != 0
-do
-echo "1. Check if server is up and running"
-echo "2. Find the number the router hops it takes to reach a given server site"
-echo "3. Enter a user login id and display the id owner"
-echo "4. Compress a given directoru and send the compressed file to an email address"
-echo "5. Send a file using email"
-echo "6.  Exit Program"
-echo "Enter selection:"  
-done
+	check=0
 fi
 
-
+# Menu
+while test 1
+do
+echo " "
+echo "Please choose one of the following commands by typing the option number:"
+echo "1. Check if server is up and running"
+echo "2. Find the number the router hops it takes to reach a given server site"
+echo "3. Enter a user login id and display the id owner"
+echo "4. Compress a given directory and send the compressed file to an email address"
+echo "5. Send a file using email"
+if [[ $check -eq 1 ]]
+then
+echo "6. Exit Program"
+fi
+echo "Enter selection:" 
 
 # Cases
 read task
 case $task in
-	1 ) echo "Running ping command on current server"
+	1 ) echo " "
+		echo "Running ping command on current server"
 		server=`hostname`
 		ping -c3 $server
 		;;
-	2 ) echo "Please enter a website in order to find the number of router hops"
+	2 ) echo " "
+		echo "Please enter a website in order to find the number of router hops"
 		read hops
 		traceroute $hops
 		;;
-	* ) echo "That is not a vaild option"
+	3 ) echo " "
+		echo "Please enter an id to search for"
+		read id
+		echo "The current owner of id, $id: "
+		cat /etc/passwd | grep $id | cut -d: -f5 | cut -d, -f1
+		;;
+	4 ) echo " "
+		echo "Please enter full path from root for directory that should be compressed:"
+		read path
+		echo "Please enter the email address you would like to sent this zip to:"
+		read email
+		cd $path
+		newname=`basename $path`
+		tar -zcvf $newname.tar.gz . > /dev/null 2>&1 
+		sendfile=$path/$newname.tar.gz
+		mailx -s "Requested Compressed file: $newname" $email < $sendfile
+		echo "Email has been sent!"
+		;;
+	5 ) echo " "
+		echo "Please enter full path from root to filename for the file that should be send"
+		read path
+		echo "Please enter the email address you would like to sent this file to:"
+		read email
+		newname=`basename $path`
+		mailx -s "File From Server: $newname" $email < $path
+		echo "Email has been sent!"
+		;;
+	6 ) break
+		;;
+	* )echo " "
+		 echo "That is not a vaild option."
+
 esac
 
+if [ $check -eq 0 ]
+then 
+	break
+fi
+
+done
 
 
-
-
-
-
-
-
-
-echo "Thank you for using this program. See you next time!"
+echo " "
+echo "Program now closing.  See you next time!"
 
 exit 0
