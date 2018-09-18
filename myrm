@@ -30,10 +30,12 @@ fi
 
 
 
+# moves fills yo Wastebasket folder
 function moveFile () {
 
 for file in "$@"
 do
+	# check if same name file exist
 	ls $HOME/Wastebasket/$file > /dev/null 2>&1
 	if [ $? = 0 ]
 	then 
@@ -41,15 +43,18 @@ do
 		newName=$file.$num
 		mv $file $newName
 		mv $newName $HOME/Wastebasket
-		echo "File $file has been deleted"
+		echo "$file has successfully been deleted"
 	else
 		mv $file $HOME/Wastebasket
-		echo "File $file has been deleted"
+		echo "$file has successfully been deleted"
 	fi
 done 
 }
 
+
+
 checkBeforeRun $*
+
 
 
 exit 0
