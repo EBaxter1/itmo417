@@ -1,0 +1,55 @@
+#!/bin/bash
+# This program is a custom rm command that will mv the selected file(s) to a wastebasket folder
+
+
+# Make wastebasket folder
+mkdir $HOME/Wastebasket > /dev/null 2>&1
+
+
+function checkBeforeRun () {
+# Make sure there is a file
+if [[ $# !=  0 ]]
+then
+
+	# Check if file is real
+	for file in "$@"
+	do
+		ls $file  > /dev/null 2>&1
+		if [ $? != 0 ]
+		then 
+			echo "File $file doesn't not exist! Please check file name"
+		else
+			echo "File $file will be deleted"
+			moveFile $*
+	fi 
+	done
+else
+	echo "Filename not entered. Program Usage: myrm file1 file2"
+fi
+}
+
+
+
+function moveFile () {
+
+for file in "$@"
+do
+	ls $HOME/Wastebasket/$file > /dev/null 2>&1
+	if [ $? = 0 ]
+	then 
+		num=$(($RANDOM))
+		newName=$file.$num
+		mv $file $newName
+		mv $newName $HOME/Wastebasket
+		echo "File $file has been deleted"
+	else
+		mv $file $HOME/Wastebasket
+		echo "File $file has been deleted"
+	fi
+done 
+}
+
+checkBeforeRun $*
+
+
+exit 0
