@@ -20,7 +20,7 @@ then
 			echo "File $file doesn't not exist! Please check file name"
 		else
 			echo "File $file will attempt to be deleted"
-			moveFile $*
+			moveFile $file
 	fi 
 	done
 else
