@@ -1,0 +1,58 @@
+Script started on Tue 18 Sep 2018 10:06:39 PM CDT
+]0;ebaxter1@sycamore:~[?1034h[ebaxter1@sycamore ~]$ m[Kls
+[0m[01;34mbin[0m  [01;34mexample[0m  [01;32mmyrm[0m  myrm_output  [01;34msubmit[0m  [01;34mtest[0m
+]0;ebaxter1@sycamore:~[ebaxter1@sycamore ~]$ myrm
+Filename not entered. Program Usage: myrm file1 file2
+]0;ebaxter1@sycamore:~[ebaxter1@sycamore ~]$ ls
+[0m[01;34mbin[0m  [01;34mexample[0m  [01;32mmyrm[0m  myrm_output  [01;34msubmit[0m  [01;34mtest[0m  [01;34mWastebasket[0m
+]0;ebaxter1@sycamore:~[ebaxter1@sycamore ~]$ rm -r Wastebasket/
+]0;ebaxter1@sycamore:~[ebaxter1@sycamore ~]$ touch file1 file2 file3
+]0;ebaxter1@sycamore:~[ebaxter1@sycamore ~]$ ls
+[0m[01;34mbin[0m  [01;34mexample[0m  file1  file2  file3  [01;32mmyrm[0m  myrm_output  [01;34msubmit[0m  [01;34mtest[0m
+]0;ebaxter1@sycamore:~[ebaxter1@sycamore ~]$ myrm file1
+File file1 will attempt to be deleted
+file1 has successfully been deleted
+]0;ebaxter1@sycamore:~[ebaxter1@sycamore ~]$ ls
+[0m[01;34mbin[0m  [01;34mexample[0m  file2  file3  [01;32mmyrm[0m  myrm_output  [01;34msubmit[0m  [01;34mtest[0m  [01;34mWastebasket[0m
+]0;ebaxter1@sycamore:~[ebaxter1@sycamore ~]$ ls Wastebasket/
+file1
+]0;ebaxter1@sycamore:~[ebaxter1@sycamore ~]$ myrm file4
+File file4 doesn't not exist! Please check file name
+]0;ebaxter1@sycamore:~[ebaxter1@sycamore ~]$ myrm file2 file [K3
+File file2 will attempt to be deleted
+file2 has successfully been deleted
+File file3 will attempt to be deleted
+file3 has successfully been deleted
+]0;ebaxter1@sycamore:~[ebaxter1@sycamore ~]$ ls W[K[K[Ks
+[0m[01;34mbin[0m  [01;34mexample[0m  [01;32mmyrm[0m  myrm_output  [01;34msubmit[0m  [01;34mtest[0m  [01;34mWastebasket[0m
+]0;ebaxter1@sycamore:~[ebaxter1@sycamore ~]$ le [K[Ks Wastebasket/
+file1  file2  file3
+]0;ebaxter1@sycamore:~[ebaxter1@sycamore ~]$ cd /tmp/
+]0;ebaxter1@sycamore:/tmp[ebaxter1@sycamore tmp]$ ls
+junkjunk  [0m[01;34msystemd-private-816fe1841c324bb0b54e4fda6426511c-chronyd.service-WSnufe[0m  [01;31mVMwareTools-10.0.9-3917699.tar.gz[0m  [01;34mvmware-tools-distrib[0m  wassup
+]0;ebaxter1@sycamore:/tmp[ebaxter1@sycamore tmp]$ touch junkyjunk
+]0;ebaxter1@sycamore:/tmp[ebaxter1@sycamore tmp]$ ls
+junkjunk  junkyjunk  [0m[01;34msystemd-private-816fe1841c324bb0b54e4fda6426511c-chronyd.service-WSnufe[0m  [01;31mVMwareTools-10.0.9-3917699.tar.gz[0m  [01;34mvmware-tools-distrib[0m  wassup
+]0;ebaxter1@sycamore:/tmp[ebaxter1@sycamore tmp]$ myrm junkyjunk 
+File junkyjunk will attempt to be deleted
+junkyjunk has successfully been deleted
+]0;ebaxter1@sycamore:/tmp[ebaxter1@sycamore tmp]$ ls
+junkjunk  [0m[01;34msystemd-private-816fe1841c324bb0b54e4fda6426511c-chronyd.service-WSnufe[0m  [01;31mVMwareTools-10.0.9-3917699.tar.gz[0m  [01;34mvmware-tools-distrib[0m  wassup
+]0;ebaxter1@sycamore:/tmp[ebaxter1@sycamore tmp]$ cd [K[K[Kcd ..
+]0;ebaxter1@sycamore:/[ebaxter1@sycamore /]$ cd /home/
+]0;ebaxter1@sycamore:/home[ebaxter1@sycamore home]$ cd /home/ebaxter1/
+]0;ebaxter1@sycamore:~[ebaxter1@sycamore ~]$ ls
+[0m[01;34mbin[0m  [01;34mexample[0m  [01;32mmyrm[0m  myrm_output  [01;34msubmit[0m  [01;34mtest[0m  [01;34mWastebasket[0m
+]0;ebaxter1@sycamore:~[ebaxter1@sycamore ~]$ ls Wastebasket/
+file1  file2  file3  junkyjunk
+]0;ebaxter1@sycamore:~[ebaxter1@sycamore ~]$ myrm /etc/motd 
+File /etc/motd will attempt to be deleted
+Error deleting file: /etc/motd
+]0;ebaxter1@sycamore:~[ebaxter1@sycamore ~]$ ls
+[0m[01;34mbin[0m  [01;34mexample[0m  [01;32mmyrm[0m  myrm_output  [01;34msubmit[0m  [01;34mtest[0m  [01;34mWastebasket[0m
+]0;ebaxter1@sycamore:~[ebaxter1@sycamore ~]$ ls Wastebasket/
+file1  file2  file3  junkyjunk
+]0;ebaxter1@sycamore:~[ebaxter1@sycamore ~]$ exit
+exit
+
+Script done on Tue 18 Sep 2018 10:13:10 PM CDT
