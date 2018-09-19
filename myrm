@@ -19,7 +19,7 @@ then
 		then 
 			echo "File $file doesn't not exist! Please check file name"
 		else
-			echo "File $file will be deleted"
+			echo "File $file will attempt to be deleted"
 			moveFile $*
 	fi 
 	done
@@ -32,7 +32,6 @@ fi
 
 # moves fills yo Wastebasket folder
 function moveFile () {
-
 for file in "$@"
 do
 	# check if same name file exist
@@ -42,11 +41,23 @@ do
 		num=$(($RANDOM))
 		newName=$file.$num
 		mv $file $newName
-		mv $newName $HOME/Wastebasket
-		echo "$file has successfully been deleted"
+		mv $newName $HOME/Wastebasket > /dev/null 2>&1
+		# check for any erros from mv command
+		if [ $? != 0 ]
+		then
+			echo "Error deleting file: $file"
+		else
+			echo "$file has successfully been deleted"
+		fi	
 	else
-		mv $file $HOME/Wastebasket
-		echo "$file has successfully been deleted"
+		mv $file $HOME/Wastebasket > /dev/null 2>&1
+ 		# check for any errors from mv command
+		if [ $? != 0 ]
+		then
+			echo "Error deleting file: $file"
+		else
+			echo "$file has successfully been deleted"
+		fi	
 	fi
 done 
 }
