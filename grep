@@ -1,0 +1,65 @@
+#!/bin/bash
+# This program runs some grep searchs on the grepDatafile.txt
+
+echo "Hello, welcome to the grep program!"
+echo " "
+
+# Print lines with phone numbers with extention
+count=`grep -c "[xX][0-9]\{4\}" /home/sam/datafile/grepDatafile.txt`  
+echo "There are $count lines that have phone numbers and they are as follows:"
+grep "[xX][0-9]\{4\}" /home/sam/datafile/grepDatafile.txt  
+echo " "
+
+#Print all lines starting with 3 numbers and a blank
+count=`grep -c "^[0-9]\{3\}[ ]" /home/sam/datafile/grepDatafile.txt`  
+echo "There are $count lines that start with 3 digits and they are as follows:"
+grep "^[0-9]\{3\}[ ]" /home/sam/datafile/grepDatafile.txt  
+echo " "
+
+#Print all lines that have a date 
+count=`grep -c  "^[a-zA-Z]\{3\}[.][ ][0-9]*[,]" /home/sam/datafile/grepDatafile.txt`  
+echo "There are $count lines that have a date and they are as follows:"
+grep  "^[a-zA-Z]\{3\}[.][ ][0-9]*[,]"  /home/sam/datafile/grepDatafile.txt  
+echo " "
+
+#Print all lines that have the same value 
+count=`grep -ci "\([aeiou]\)\([a-z]\)\1" /home/sam/datafile/grepDatafile.txt`  
+echo "There are $count lines that have the pattern, vowel charator vowel, and they are as follows:"
+grep -i "\([aeiou]\)\([a-z]\)\1" /home/sam/datafile/grepDatafile.txt
+echo " "
+
+#Print all lines that don't start with S 
+count=`grep -cv "^[S]" /home/sam/datafile/grepDatafile.txt`  
+echo "There are $count lines that don't start with S and they are as follows:"
+# grep -v "^[S]" /home/sam/datafile/grepDatafile.txt
+echo " "
+
+#Print all lines that have CA
+count=`grep -c "[c][a] \| [C][A]" /home/sam/datafile/grepDatafile.txt`  
+echo "There are $count lines that contain CA or ca and they are as follows:"
+grep "[c][a] \| [C][A]" /home/sam/datafile/grepDatafile.txt
+echo " "
+
+#Print all lines that have an email adreess with line number 
+count=`grep -cn [@] /home/sam/datafile/grepDatafile.txt`  
+echo "There are $count lines that have an email address and they are as follows with their line number:"
+grep -n [@] /home/sam/datafile/grepDatafile.txt
+echo " "
+
+#Print all lines that don't include Sep. 
+count=`grep -cv "Sep." /home/sam/datafile/grepDatafile.txt`  
+echo "There are $count lines that don't contain "Sep." and they are as follows:"
+grep -v "Sep." /home/sam/datafile/grepDatafile.txt
+echo " "
+
+#Print all lines that have the word de
+count=`grep -c "[ ]de[ ]" /home/sam/datafile/grepDatafile.txt`  
+echo "There are $count lines that have the word de and they are as follows:"
+grep "[ ]de[ ]" /home/sam/datafile/grepDatafile.txt
+echo " "
+
+
+echo "Thank you for using the grep program!"
+
+
+exit 0
