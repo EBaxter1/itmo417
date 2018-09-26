@@ -31,7 +31,7 @@ echo " "
 #Print all lines that don't start with S 
 count=`grep -cv "^[S]" /home/sam/datafile/grepDatafile.txt`  
 echo "There are $count lines that don't start with S and they are as follows:"
-# grep -v "^[S]" /home/sam/datafile/grepDatafile.txt
+grep -v "^[S]" /home/sam/datafile/grepDatafile.txt
 echo " "
 
 #Print all lines that have CA
