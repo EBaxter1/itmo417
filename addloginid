@@ -1,0 +1,158 @@
+#!/bin/bash
+# This program adds a new user to the system
+
+echo "Hello, welcome to the addloginid program."
+echo " "
+
+# Making global variables for functions
+id=" "
+name=" "
+newID=" "
+groupGroup=" "
+
+# Function to get needed information from user
+function getUserID () {
+	echo "Please enter new user id: "
+	read id
+	grep $id /etc/passwd > /dev/null 2>&1
+	if [ $? == 0 ]
+	then
+		echo "$id is a duplicate id. Please try again with a unqiue id"
+	else
+		echo "Please enter new user first and last names seperated by a space"
+		read name
+		getUID
+	fi
+}
+
+# Function to make new user
+function getUID () {
+	echo "Checking current users..."
+	echo "Last created user in the /etc/passwd file: "
+	tail -1 /etc/passwd
+	lastID=`tail -1 /etc/passwd | cut -d: -f3`
+	newID=$((1 + $lastID))
+	echo "Next available UID is $newID. Would you like to use this UID for $name?<y/n>"
+	read more
+	if [ $more == "y" ]
+	then
+		echo "new available UID will be used for $name"
+		getGroup
+	elif [ $more == "n" ]
+	then
+		echo "Please enter new unqiue UID:"
+		read newID
+		grep $newID /etc/passwd > /dev/null 2>&1
+		if [ $? != 0 ]
+		then
+			echo "new UID $newID will be used for $name"
+			getGroup
+		else
+			echo "$newID is already being used as a UID. Please enter a new one:"
+			read newID
+			grep $newID /etc/passwd > /dev/null 2>&1
+			if [ $? != 0 ]
+			then
+				echo "$newID will be used as UID for $name"
+				getGroup
+			else
+				echo "$newID is already being used as a UID. Too many atempts made program will now close"
+				exit 1
+			fi
+		fi
+	else
+		echo "Invaild response. Program will now close"
+		exit 2
+	fi
+}
+
+# Function to add new user to group
+function getGroup () {
+	echo "Last created group in /etc/group file:"
+	tail -1 /etc/group
+	lastGroup=`tail -1 /etc/group | cut -d: -f3`
+	newGroup=$((1 + $lastGroup ))
+	echo "$newGroup will be used as new group id for new group under id: $id"
+	echo "Please enter root password in order to add new group."
+	sudo groupadd -g $newGroup $id
+	addUser
+}
+
+# Function for making new user
+function addUser () {
+	echo "Atempting to create user $id."
+	sudo useradd $id -c "$name" -u $newID -g $newGroup -s /bin/bash # > /dev/null 2>&1
+	if [ $? != 0 ]
+	then
+		echo "Error creating user. Program will now close"
+		exit 3
+	else
+		echo "Adding new user to /etc/passwd and /etc/group"
+		echo "Atempting to create home directory /home/$id. Root password required"
+
+	fi
+
+	sudo mkdir /home/$id > /dev/null 2>&1
+	if [ $? != 0 ]
+	then
+		echo "Error creating home directory. Program will now close"
+		exit 4
+	else
+		echo "Setting home directory to 755 permission"
+		sudo chmod 755 /home/$id
+		echo "Please enter root password in order to set ownsership of home directory"
+		sudo chown $id:$id /home/$id
+		echo "Copying bash profile file into home directory. Please enter root password"
+	fi
+
+	sudo cp /etc/skel/.profile /home/$id
+	if [ $? != 0 ]
+	then
+		echo "Error copying .bash_profile . Program will now close"
+		exit 5
+	else
+		echo "Setting new password for id $id. Please remember new password:"
+		sudo passwd $id
+		echo "Creating new user with id $id was successful!"
+		showUser
+	fi
+}
+
+# Function to output new user info
+function showUser () {
+	echo " "
+	echo "New home directory is /home/$id"
+	ls -l /home/ | grep $id
+	echo "The user profile is shown below:"
+	ls -al /home/$id | grep .profile
+	echo "Last entry in /etc/passwd is now the  following:"
+	tail -1 /etc/passwd
+	echo "Last entry in /etc/group is now the following:"
+	tail -1 /etc/group
+	echo "Please inform $name of their new password"
+}
+
+
+# Loop to keep program going
+test=1
+
+while [ $test = 1 ]
+do
+getUserID
+echo "Would you like to add another user?<y/n>"
+read more
+
+if [ $more == "y" ]
+then
+	test=1
+elif [ $more == "n" ]
+then
+	test=0
+else
+	echo "Invaild response. Program ending"
+fi
+done
+
+echo " "
+echo "Thank you for using this program. Bye-bye!"
+exit 0

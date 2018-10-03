@@ -1,0 +1,80 @@
+Script started on 2018-10-02 23:32:41-0500
+]0;baxter@baxter-VirtualBox: ~/test[01;32mbaxter@baxter-VirtualBox[00m:[01;34m~/test[00m$ ./addloginid
+Hello, welcome to the addloginid program.
+
+Please enter new user id:
+testid2
+testid2 is a duplicate id. Please try again with a unqiue id
+Would you like to add another user?<y/n>
+n
+
+Thank you for using this program. Bye-bye!
+]0;baxter@baxter-VirtualBox: ~/test[01;32mbaxter@baxter-VirtualBox[00m:[01;34m~/test[00m$ ./addloginid
+Hello, welcome to the addloginid program.
+
+Please enter new user id:
+testid2
+testid2 is a duplicate id. Please try again with a unqiue id
+Would you like to add another user?<y/n>
+y
+Please enter new user id:
+1004    tester3
+Please enter new user first and last names seperated by a space
+Erin Baxter
+Checking current users...
+Last created user in the /etc/passwd file:
+testid2:x:1004:1000:John Smith:/home/testid2:/bin/bash
+Next available UID is 1005. Would you like to use this UID for Erin Baxter?<y/n>
+n
+Please enter new unqiue UID:
+1004
+1004 is already being used as a UID. Please enter a new one:
+1004
+1004 is already being used as a UID. Too many atempts made program will now close
+]0;baxter@baxter-VirtualBox: ~/test[01;32mbaxter@baxter-VirtualBox[00m:[01;34m~/test[00m$ ./addloginid exit[K./addloginid
+Hello, welcome to the addloginid program.
+
+Please enter new user id:
+iitlogin
+Please enter new user first and last names seperated by a space
+James Kirk
+Checking current users...
+Last created user in the /etc/passwd file:
+testid2:x:1004:1000:John Smith:/home/testid2:/bin/bash
+Next available UID is 1005. Would you like to use this UID for James Kirk?<y/n>
+y
+new available UID will be used for James Kirk
+Last created group in /etc/group file:
+testid2:x:1001:
+1002 will be used as new group id for new group under id: iitlogin
+Please enter root password in order to add new group.
+[sudo] password for baxter:
+Atempting to create user iitlogin.
+Adding new user to /etc/passwd and /etc/group
+Atempting to create home directory /home/iitlogin. Root password required
+Setting home directory to 755 permission
+Please enter root password in order to set ownsership of home directory
+Copying bash profile file into home directory. Please enter root password
+Setting new password for id iitlogin. Please remember new password:
+Enter new UNIX password:
+Retype new UNIX password:
+passwd: password updated successfully
+Creating new user with id iitlogin was successful!
+
+New home directory is /home/iitlogin
+drwxr-xr-x  2 iitlogin iitlogin 4096 Oct  2 23:33 iitlogin
+The user profile is shown below:
+-rw-r--r-- 1 root     root      807 Oct  2 23:33 .profile
+Last entry in /etc/passwd is now the  following:
+iitlogin:x:1005:1002:James Kirk:/home/iitlogin:/bin/bash
+Last entry in /etc/group is now the following:
+iitlogin:x:1002:
+Please inform James Kirk of their new password
+Would you like to add another user?<y/n>
+n
+
+Thank you for using this program. Bye-bye!
+]0;baxter@baxter-VirtualBox: ~/test[01;32mbaxter@baxter-VirtualBox[00m:[01;34m~/test[00m$ exit
+exit
+
+Script done on 2018-10-02 23:35:33-0500
