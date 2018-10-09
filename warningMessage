@@ -1,0 +1,5 @@
+# warning file to be sent for system usage to system admin
+
+The root file system storage is currently greater than or equal to 95%. Please take immediate action to reduce the disk space usage. This is an automatic message sent by the system.
+
+Thank you

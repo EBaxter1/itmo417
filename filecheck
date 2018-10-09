@@ -1,0 +1,24 @@
+#!/bin/bash
+
+#This program will check system usage and send alert if needed
+
+# Let user know something is happening
+echo "System usage check starting"
+echo " "
+
+# enter admin email
+email="ebaxter1@hawk.iit.edu"
+
+# Put usage into variable
+usage=`df -h | awk '/root/ {print $5}' | cut -d'%' -f 1`
+
+# check usage 
+if [ $usage -ge 95 ]
+then
+	mailx -s "Filesystem Disk Space Warning!" $email < warningMessage
+	echo "Usage above warning limit. Email alert sent to system administrator, please check email for more information" 
+else
+	echo "Usage below warning amount. Program will now end, thank you"
+fi
+
+exit 0
