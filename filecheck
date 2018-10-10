@@ -10,10 +10,10 @@ echo " "
 email="ebaxter1@hawk.iit.edu"
 
 # Put usage into variable
-usage=`df -h | awk '/root/ {print $5}' | cut -d'%' -f 1`
+usage=`df -h | awk '/root/ {print $5}' | sed 's/%//'`
 
 # check usage 
-if [ $usage -ge 95 ]
+if [ $usage -ge 10 ]
 then
 	mailx -s "Filesystem Disk Space Warning!" $email < warningMessage
 	echo "Usage above warning limit. Email alert sent to system administrator, please check email for more information" 
