@@ -3,24 +3,34 @@
 #This program will check system usage and send alert if needed
 
 # Let user know something is happening
-echo "System usage check starting"
+echo "Free memory check starting"
 echo " "
 
 # enter admin email
 email="ebaxter1@hawk.iit.edu"
 
 # Put usage into variable
-usage=`df -h | awk '/root/ {print $4}' | sed 's/[A-Z]//'`
+usage=`cat /proc/meminfo | grep MemFree | awk '{print $2}'`
 
 # echo $usage
 
-# check usage 
-if [ $usage -lt 1024 ] 
+# check usage
+check=1
+while [ $check = 1 ]
+do
+if [ $usage -lt 1000000 ] 
 then
-	mailx -s "Filesystem Disk Space Warning!" $email < warningMessage
-	echo "Usage above warning limit. Email alert sent to system administrator, please check email for more information" 
+	mailx -s "Free Cashed Memory Drop Warning!!" $email < warningMessage2
+	echo "Free Cached Memory has dropped below 1000MB. Email alert sent to system administrator, please check email for more information."
+	echo "Program will now close to prevent multiple emails. Please start program again to resume monitering" 
+	check=0
 else
-	echo "Usage below warning amount. Program will now end, thank you"
+	check=1
+	sleep 10
 fi
+# make it so program stops sometimes
+sleep 1
+
+done
 
 exit 0

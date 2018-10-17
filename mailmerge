@@ -49,11 +49,11 @@ done
 # new custom file
 function newFile () {
 count=1
-for person in $(cat names.txt | tr -d " ")
+cat names.txt | while read line; 
 do
 	echo " "
 	echo "Template $count:"
-	sed -e 's/NAME/'$person'/' template.txt
+	sed -e "s/NAME/$line/" template.txt
 	
 	count=$((count + 1))
 done
