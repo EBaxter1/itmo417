@@ -1,0 +1,67 @@
+#!/bin/bash
+
+#This program will allow you to send the same email to multiple people
+
+echo "Welcome to the mail merge program. Usage: enter the name  of recipients and they will be sent
+a letter template customized with their name"
+
+# delate names file if exist
+rm names.txt > /dev/null 2>&1
+
+# global variables
+name=" "
+
+# grab name
+function getName () {
+echo " "
+echo "Please enter name of recipient: "
+read name
+}
+
+# add names to file
+function addName () {
+echo $name >> names.txt 
+}
+
+# Keep program going to add more people
+test=1
+
+while [ $test = 1 ]
+do
+
+getName
+addName
+
+echo "Would you like to add another recipient?<y/n>"
+read more
+
+if [ $more == "y" ] 
+then
+	test=1
+elif [ $more == "n" ]
+then
+	test=0
+else
+	echo "Invaild respone. Please try again."
+fi
+done
+
+# new custom file
+function newFile () {
+count=1
+cat names.txt | while read line; 
+do
+	echo " "
+	echo "Template $count:"
+	sed -e "s/NAME/$line/" template.txt
+	
+	count=$((count + 1))
+done
+}
+
+newFile
+
+# cat names.txt
+
+exit 0
+ 

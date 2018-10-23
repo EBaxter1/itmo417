@@ -1,0 +1,57 @@
+#!/bin/bash
+
+# This program will check how many times a user is logged on
+
+echo "Welcome to the login check program"
+
+# global variables
+name=" "
+
+# grab uid
+function getUID () {
+echo " "
+echo "Please enter the UID of the user you would like to check the logins for:"
+read name
+}
+
+# check login ons
+function checkID () {
+echo " "
+check=`who | grep $name | wc -l`
+echo "The UID that contains $name is currently logined on $check time(s)"
+}
+
+# loop to keep program running 
+test=1
+
+while [ $test = 1 ]
+do
+
+getUID
+# check if real uid
+cat /etc/passwd | cut -d: -f1 | grep $name > /dev/null 2>&1
+if [ $? = 0 ]
+then
+	checkID
+else
+	echo "UID not found"
+fi
+
+echo "Would you like to search for another UID?<y/n>"
+read more
+
+if [ $more == "y" ]
+then 
+	test=1
+elif [ $more == "n" ]
+then
+	test=0
+else
+	echo "Invaild answer. Program now ending."
+	exit 1
+fi
+done
+
+echo "Goodbye!"
+
+exit 0
