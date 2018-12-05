@@ -1,0 +1,21 @@
+Script started on Tue 04 Dec 2018 09:24:49 PM CST
+]0;ebaxter1@sycamore:~/test[?1034h[ebaxter1@sycamore test]$ ./final
+Hello and welcome to the odd count program!
+ 
+odd value in a1 is 6
+ 
+odd value in a2 is 6
+ 
+odd value in a3 is 6
+ 
+odd value in a4 is 6
+ 
+odd value in a5 is unable to be found
+ 
+odd value in a6 is 1
+ 
+That is all arrays! Program closing
+]0;ebaxter1@sycamore:~/test[ebaxter1@sycamore test]$ exit
+exit
+
+Script done on Tue 04 Dec 2018 09:24:56 PM CST
